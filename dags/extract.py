@@ -3,6 +3,8 @@ from datetime import datetime
 
 from airflow import DAG
 from airflow.operators.bash import BashOperator
+## Import the EmptyOperator
+from airflow.operators.empty import EmptyOperator
 
 AIRFLOW_HOME = os.getenv("AIRFLOW_HOME")
 
@@ -22,4 +24,6 @@ with DAG(
         bash_command=f"curl {trip_data_url} > {filename}",
     )
 
-    curl_trip_data_task
+    empty = EmptyOperator(task_id="empty")
+
+    curl_trip_data_task >> empty

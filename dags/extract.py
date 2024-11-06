@@ -25,5 +25,5 @@ with DAG(
     )
 
     empty = EmptyOperator(task_id="empty")
-
-    curl_trip_data_task >> empty
+    empty3 = EmptyOperator(task_id="empty3")
+    curl_trip_data_task >> empty >> empty3
